@@ -7,7 +7,6 @@ import tr.com.study.api.createPopulation.GenerateGeneService;
 import tr.com.study.data.DataHolder;
 import tr.com.study.data.Gene;
 import tr.com.study.data.Task;
-import tr.com.study.data.Ugur;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -47,9 +46,8 @@ public class CreatePopulationServiceImpl  implements CreatePopulationService {
           Gene copy= new Gene(getGeneFromIdList(Arrays.asList(idList)), 0);
           Gene timedGene = generateGeneService.calculateStartStopTime(copy,12);
           Gene gene = new Gene(timedGene);
-          Ugur ugur = new Ugur();
-          ugur.setBardak("aaa");
-          kafkaProducerService.sendMessage("deneme",ugur);
+
+          kafkaProducerService.sendMessage("erik",gene);
 
           population.add(gene);
 

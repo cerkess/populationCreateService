@@ -3,11 +3,11 @@ package tr.com.study.configuration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Serializer;
-import tr.com.study.data.Ugur;
+import tr.com.study.data.Gene;
 
 import java.util.Map;
 
-public class UgurSerializer implements Serializer<Ugur> {
+public class GeneSerializer implements Serializer<Gene> {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -17,7 +17,7 @@ public class UgurSerializer implements Serializer<Ugur> {
     }
 
     @Override
-    public byte[] serialize(String topic, Ugur data) {
+    public byte[] serialize(String topic, Gene data) {
         try {
             return objectMapper.writeValueAsBytes(data);
         } catch (Exception e) {

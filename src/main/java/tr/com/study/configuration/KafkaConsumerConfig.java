@@ -8,10 +8,8 @@ import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
-import org.springframework.kafka.listener.ContainerProperties;
-import org.springframework.kafka.listener.SeekToCurrentErrorHandler;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
-import tr.com.study.data.Ugur;
+import tr.com.study.data.Gene;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,11 +18,11 @@ import java.util.Map;
 @EnableKafka
 public class KafkaConsumerConfig {
     @Bean
-    public ConsumerFactory<String, Ugur> ugurConsumerFactory() {
+    public ConsumerFactory<String, Gene> geneConsumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                "localhost:9092");
+                "kafka-1:9092");
         props.put(
                 ConsumerConfig.GROUP_ID_CONFIG,
                 "2366");
@@ -38,16 +36,16 @@ public class KafkaConsumerConfig {
         return new DefaultKafkaConsumerFactory<>(
                 props,
                 new StringDeserializer(),
-                new JsonDeserializer<>(Ugur.class));
+                new JsonDeserializer<>(Gene.class));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Ugur>
+    public ConcurrentKafkaListenerContainerFactory<String, Gene>
     kafkaListenerContainerFactory() {
 
-        ConcurrentKafkaListenerContainerFactory<String, Ugur> factory =
+        ConcurrentKafkaListenerContainerFactory<String, Gene> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(ugurConsumerFactory());
+        factory.setConsumerFactory(geneConsumerFactory());
         return factory;
     }
 }
