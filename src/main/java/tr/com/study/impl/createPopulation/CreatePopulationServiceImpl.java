@@ -7,6 +7,7 @@ import tr.com.study.api.createPopulation.GenerateGeneService;
 import tr.com.study.data.DataHolder;
 import tr.com.study.data.Gene;
 import tr.com.study.data.Task;
+import tr.com.study.kafka.KafkaProducer;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -21,7 +22,7 @@ public class CreatePopulationServiceImpl  implements CreatePopulationService {
     GenerateGeneService generateGeneService;
 
     @Autowired
-    KafkaProducerService kafkaProducerService;
+    KafkaProducer kafkaProducer;
 
 
     @Override
@@ -47,7 +48,7 @@ public class CreatePopulationServiceImpl  implements CreatePopulationService {
           Gene timedGene = generateGeneService.calculateStartStopTime(copy,12);
           Gene gene = new Gene(timedGene);
 
-          kafkaProducerService.sendMessage("erik",gene);
+          kafkaProducer.sendMessage(gene);
 
           population.add(gene);
 

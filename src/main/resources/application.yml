@@ -1,9 +1,22 @@
-spring:
-  kafka:
-    bootstrap-servers: kafka-1:9092
-    consumer:
-      group-id: 2366
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-         spring.json.trusted.packages: '*'
+server:
+  port: 8080
+
+spring.cloud:
+  stream:
+    binders:
+      mainKafka:
+        type: kafka
+        environment:
+          spring.cloud.stream.kafka.binder:
+            brokers: localhost:19092
+            autoAddPartitions: true
+            configuration:
+              max.poll.records: 50
+              fetch.min.bytes: 900000
+              fetch.min.wait.ms: 1000
+              max.partition.fetch.bytes: 600000
+              max.request.size: 20000000
+    bindings:
+      producer-out-0:
+        destination: ugur
+        binder: mainKafka
