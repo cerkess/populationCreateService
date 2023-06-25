@@ -18,16 +18,9 @@ import java.util.Map;
 public class KafkaProducerConfig {
 
     @Bean
-    public NewTopic topic() {
-        return TopicBuilder.name("erik")
-                .partitions(1)
-                .replicas(1)
-                .build();
-    }
-    @Bean
     public ProducerFactory<String, Gene> producerFactory() {
         Map<String, Object> configs = new HashMap<>();
-        configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka-1:9092");
+        configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:19092");
         configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, GeneSerializer.class);
 

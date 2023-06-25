@@ -47,7 +47,7 @@ public class CreatePopulationServiceImpl  implements CreatePopulationService {
           Gene timedGene = generateGeneService.calculateStartStopTime(copy,12);
           Gene gene = new Gene(timedGene);
 
-          kafkaProducerService.sendMessage("erik",gene);
+          kafkaProducerService.sendMessage("population",gene);
 
           population.add(gene);
 
