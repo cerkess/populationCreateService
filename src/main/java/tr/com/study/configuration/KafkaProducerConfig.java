@@ -34,12 +34,6 @@ public class KafkaProducerConfig {
         return new DefaultKafkaProducerFactory<>(configs);
     }
 
-//    @Bean
-//    public KafkaTemplate<String, Gene> kafkaTemplate() {
-//        KafkaTemplate<String, Gene> kafkaTemplate = new KafkaTemplate<>(producerFactory());
-//        kafkaTemplate.setMessageConverter(new StringJsonMessageConverter());
-//        return kafkaTemplate;
-//    }
 
     @Bean
     public GeneSerializer geneSerializer() {
